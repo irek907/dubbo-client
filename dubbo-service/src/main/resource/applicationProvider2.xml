@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+	    <dubbo:application name="hello-world" />
+	    <!-- 注册地址 -->
+	    <dubbo:registry address="zookeeper://172.16.58.9:2181" /> 
+	    <!-- 
+	    <dubbo:registry address="multicast:	
+	    -->
+        <!-- Service interface Concurrent Control -->
+        <dubbo:service interface="cn.zto.service.IProcessData " ref="demoService" executes="10" />
+		<!-- designate implementation -->
+	    <bean id="demoService" class="cn.zto.service.impl.ProcessDataImpl" />
+	    
+	    
+	    <dubbo:service interface="cn.zto.service.IDoworking" ref="doWork" executes="10" />
+		<!-- designate implementation -->
+	    <bean id="doWork" class="cn.zto.service.impl.Doworking" />
+</beans>
